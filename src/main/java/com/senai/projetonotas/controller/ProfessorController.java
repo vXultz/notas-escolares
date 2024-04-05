@@ -16,8 +16,11 @@ import java.util.List;
 @RequestMapping("/professores")
 public class ProfessorController {
 
-    @Autowired
-    private ProfessorService professorService;
+    private final ProfessorService professorService;
+
+    public ProfessorController(ProfessorService professorService) {
+        this.professorService = professorService;
+    }
 
     @GetMapping
     public ResponseEntity<List<ProfessorEntity>> listarTodos(){

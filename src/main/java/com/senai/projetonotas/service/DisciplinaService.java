@@ -14,8 +14,11 @@ import java.util.List;
 @Service
 public class DisciplinaService {
 
-    @Autowired
-    DisciplinaRepository disciplinaRepository;
+    private final DisciplinaRepository disciplinaRepository;
+
+    public DisciplinaService(DisciplinaRepository disciplinaRepository) {
+        this.disciplinaRepository = disciplinaRepository;
+    }
 
     public List<DisciplinaEntity> listarTodos(){
         log.info("todas as Disciplinas listadas");

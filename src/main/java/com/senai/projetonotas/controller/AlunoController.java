@@ -16,11 +16,14 @@ import java.util.Optional;
 @RequestMapping("/alunos")
 public class AlunoController {
 
-    @Autowired
-    private AlunoService service;
+    private final AlunoService service;
+
+    public AlunoController(AlunoService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public ResponseEntity<List<AlunoEntity>> listarTodos(){
+    public ResponseEntity<List<AlunoEntity>> listarTodos() {
         log.info("GET Alunos -> listarTodos");
         List<AlunoEntity> alunos = service.listarTodos();
         log.info("200 OK");
@@ -28,7 +31,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlunoEntity> listarPorId(@PathVariable Long id){
+    public ResponseEntity<AlunoEntity> listarPorId(@PathVariable Long id) {
         log.info("GET Alunos -> listarPorId");
         AlunoEntity aluno = service.listarPorId(id);
         log.info("200 OK");
@@ -36,7 +39,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoEntity> salvar(@RequestBody AlunoEntity aluno){
+    public ResponseEntity<AlunoEntity> salvar(@RequestBody AlunoEntity aluno) {
         log.info("POST Alunos -> salvar");
         AlunoEntity alunoSalvo = service.salvar(aluno);
         log.info("201 CREATED");
@@ -44,18 +47,18 @@ public class AlunoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerPorId(@PathVariable Long id){
+    public ResponseEntity<Void> removerPorId(@PathVariable Long id) {
         log.info("DELETE Alunos -> removerPorId");
         service.removerPorId(id);
         log.info("204 NO_CONTENT");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @PutMapping
-    public ResponseEntity<Void> atualizar(@RequestBody AlunoEntity aluno){
+    public ResponseEntity<Void> atualizar(@RequestBody AlunoEntity aluno) {
         log.info("PUT Alunos -> atualizar");
         service.atualizar(aluno);
         log.info("200 OK");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

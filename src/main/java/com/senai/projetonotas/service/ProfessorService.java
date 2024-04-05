@@ -13,9 +13,11 @@ import java.util.List;
 @Service
 public class ProfessorService {
 
-    @Autowired
-    ProfessorRepository professorRepository;
+    private final ProfessorRepository professorRepository;
 
+    public ProfessorService(ProfessorRepository professorRepository) {
+        this.professorRepository = professorRepository;
+    }
 
     public List<ProfessorEntity> listarTodos(){
         log.info("todos os professores listados");

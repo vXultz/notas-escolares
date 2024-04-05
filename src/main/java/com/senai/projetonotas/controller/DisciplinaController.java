@@ -16,8 +16,11 @@ import java.util.List;
 @RequestMapping("/disciplinas")
 public class DisciplinaController {
 
-    @Autowired
-    private DisciplinaService disciplinaService;
+    private final DisciplinaService disciplinaService;
+
+    public DisciplinaController(DisciplinaService disciplinaService) {
+        this.disciplinaService = disciplinaService;
+    }
 
     @GetMapping
     public ResponseEntity<List<DisciplinaEntity>> listarTodos(){

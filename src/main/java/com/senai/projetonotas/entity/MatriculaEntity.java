@@ -23,8 +23,8 @@ public class MatriculaEntity {
     @JoinColumn(name = "disciplina_id", nullable = false)
     private DisciplinaEntity disciplina;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dataMatricula;
+//    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//    private LocalDateTime dataMatricula;
 
     @Column(nullable = false, columnDefinition = "NUMERIC(5,2) DEFAULT '0.00'")
     private BigDecimal mediaFinal;

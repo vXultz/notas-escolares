@@ -12,8 +12,12 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class AlunoService {
-    @Autowired
-    AlunoRepository repository;
+
+    private final AlunoRepository repository;
+
+    public AlunoService(AlunoRepository repository) {
+        this.repository = repository;
+    }
 
     public List<AlunoEntity> listarTodos(){
         log.info("todos os alunos listados");
