@@ -40,13 +40,17 @@ public class MatriculaController {
 
     @GetMapping("aluno-id/{id}")
     public ResponseEntity<List<MatriculaEntity>> getAlunoId(@PathVariable Long id) {
+        log.info("GET Matriculas/aluno-id -> buscarMatriculaPorAlunoId");
         List<MatriculaEntity> matriculas = service.buscarMatriculaPorAlunoId(id);
+        log.info("200 OK");
         return ResponseEntity.status(HttpStatus.OK).body(matriculas);
     }
 
     @GetMapping("disciplina-id/{id}")
     public ResponseEntity<List<MatriculaEntity>> getDisciplinaId(@PathVariable Long id) {
+        log.info("GET Matriculas/disciplina-id -> buscarMatriculaPorDisciplinaId");
         List<MatriculaEntity> matriculas = service.buscarMatriculaPorDisciplinaId(id);
+        log.info("200 OK");
         return ResponseEntity.status(HttpStatus.OK).body(matriculas);
     }
 
