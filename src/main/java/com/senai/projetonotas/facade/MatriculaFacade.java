@@ -5,10 +5,12 @@ import com.senai.projetonotas.entity.NotaEntity;
 import com.senai.projetonotas.repository.MatriculaRepository;
 import com.senai.projetonotas.service.MatriculaService;
 import com.senai.projetonotas.service.NotaService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class MatriculaFacade {
     
     private final MatriculaService service;
@@ -41,7 +43,7 @@ public class MatriculaFacade {
 
         for (NotaEntity nota : listaNotas){
             if (Objects.equals(nota.getMatricula(), matricula)){
-                new RuntimeException("Não é possivel deletar uma Matricula com nota vinculada");
+                throw new RuntimeException("Não é possivel deletar uma Matricula com nota vinculada");
             }
         }
         repository.deleteById(id);

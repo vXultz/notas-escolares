@@ -2,9 +2,11 @@ package com.senai.projetonotas.facade;
 
 import com.senai.projetonotas.entity.AlunoEntity;
 import com.senai.projetonotas.service.AlunoService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AlunoFacade {
     
     private final AlunoService service;

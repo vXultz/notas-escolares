@@ -3,9 +3,11 @@ package com.senai.projetonotas.facade;
 import com.senai.projetonotas.entity.DisciplinaEntity;
 import com.senai.projetonotas.repository.DisciplinaRepository;
 import com.senai.projetonotas.service.DisciplinaService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DisciplinaFacade {
 
     private final DisciplinaService service;

@@ -5,10 +5,12 @@ import com.senai.projetonotas.repository.NotaRepository;
 import com.senai.projetonotas.service.MatriculaService;
 import com.senai.projetonotas.service.NotaService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
+@Service
 public class NotaFacade {
     
     private final NotaService service;

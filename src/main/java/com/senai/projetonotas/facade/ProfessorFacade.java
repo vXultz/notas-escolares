@@ -2,9 +2,11 @@ package com.senai.projetonotas.facade;
 
 import com.senai.projetonotas.entity.ProfessorEntity;
 import com.senai.projetonotas.service.ProfessorService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProfessorFacade {
     
     private final ProfessorService service;
