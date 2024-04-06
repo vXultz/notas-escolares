@@ -70,10 +70,10 @@ public class MatriculaController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @PutMapping
-//    public ResponseEntity<MatriculaEntity> atualizar(@PathVariable Long id, @RequestBody MatriculaEntity matricula) {
-//        log.info("PUT Matriculas -> atualizar");
-//        log.info("200 OK");
-//        return ResponseEntity.status(HttpStatus.OK).body(service.atualizar(id, matricula));
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<MatriculaEntity> atualizar(@PathVariable Long id, @RequestBody MatriculaEntity matricula) {
+        log.info("PUT Matriculas -> atualizar");
+        log.info("200 OK");
+        return ResponseEntity.status(HttpStatus.OK).body(service.atualizar(id, matricula));
+    }
 }

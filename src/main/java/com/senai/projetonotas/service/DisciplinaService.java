@@ -33,6 +33,7 @@ public class DisciplinaService {
 
     public DisciplinaEntity salvar(DisciplinaEntity disciplina) {
         log.info("salvando disciplina com o nome {}", disciplina.getNome());
+        disciplina.setId(null);
         return disciplinaRepository.save(disciplina);
     }
     public void removerPorId(Long id) {
@@ -40,8 +41,8 @@ public class DisciplinaService {
         disciplinaRepository.deleteById(id);
     }
 
-    public int atualizar(DisciplinaEntity disciplina){
+    public int atualizar(DisciplinaEntity disciplina, Long id){
         log.info("atualizando disciplina com o id {}", disciplina.getId());
-        return disciplinaRepository.update(disciplina.getId(), disciplina.getNome());
+        return disciplinaRepository.update(id, disciplina.getNome(), disciplina.getProfessor().getId());
     }
 }

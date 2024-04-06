@@ -32,6 +32,7 @@ public class AlunoService {
 
     public AlunoEntity salvar(AlunoEntity aluno) {
         log.info("salvando aluno com o nome {}", aluno.getNome());
+        aluno.setId(null);
         return repository.save(aluno);
     }
     public void removerPorId(Long id) {

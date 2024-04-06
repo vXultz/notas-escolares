@@ -52,6 +52,7 @@ public class MatriculaService {
 
     public MatriculaEntity salvar(MatriculaEntity matricula) {
         log.info("salvando matricula do aluno com nome {}", matricula.getAluno().getNome());
+        matricula.setId(null);
         return repository.save(matricula);
     }
 

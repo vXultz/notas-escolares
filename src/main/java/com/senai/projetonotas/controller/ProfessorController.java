@@ -53,10 +53,10 @@ public class ProfessorController {
         log.info("204 NO_CONTENT");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PutMapping
-    public ResponseEntity<Void> atualizar(@RequestBody ProfessorEntity professor){
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody ProfessorEntity professor){
         log.info("PUT Professor -> atualizar");
-        professorService.atualizar(professor);
+        professorService.atualizar(professor, id);
         log.info("200 OK");
         return new ResponseEntity<>(HttpStatus.OK);
     }

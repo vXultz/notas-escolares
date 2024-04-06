@@ -11,7 +11,7 @@ public interface ProfessorRepository extends JpaRepository <ProfessorEntity, Lon
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Professor SET nome = :nome, WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE Professor SET nome = :nome WHERE id = :id", nativeQuery = true)
     int update(@Param("id") Long id,
                @Param("nome") String nome
     );

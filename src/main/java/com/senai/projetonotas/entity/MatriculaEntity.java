@@ -25,10 +25,11 @@ public class MatriculaEntity {
     private DisciplinaEntity disciplina;
 
     @ColumnDefault(value = "CURRENT_TIMESTAMP")
-    @Column(nullable = false, columnDefinition = "TIMESTAMP")
-    private LocalDateTime dataMatricula;
+    @Column( columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataMatricula = LocalDateTime.now();
+
 
     @ColumnDefault(value = "0.00")
-    @Column(nullable = false, columnDefinition = "NUMERIC(5,2)")
-    private BigDecimal mediaFinal;
+    @Column( columnDefinition = "NUMERIC(5,2)")
+    private BigDecimal mediaFinal = BigDecimal.valueOf(0.00);
 }
