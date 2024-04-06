@@ -56,10 +56,7 @@ public class MatriculaService {
         return repository.save(matricula);
     }
 
-    public void removerPorId(Long id) {
-        log.info("removendo matricula do aluno com o id {}", id);
-        repository.deleteById(id);
-    }
+
 
     public MatriculaEntity atualizar(Long id, MatriculaEntity matricula) {
         log.info("atualizando matricula do aluno com o id {}", matricula.getAluno().getId());

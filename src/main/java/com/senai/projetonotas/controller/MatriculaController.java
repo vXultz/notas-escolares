@@ -1,7 +1,7 @@
 package com.senai.projetonotas.controller;
 
 import com.senai.projetonotas.entity.MatriculaEntity;
-import com.senai.projetonotas.service.MatriculaService;
+import com.senai.projetonotas.facade.MatriculaFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/matriculas")
 public class MatriculaController {
 
-    private final MatriculaService service;
+    private final MatriculaFacade service;
 
-    public MatriculaController(MatriculaService service) {
+    public MatriculaController(MatriculaFacade service) {
         this.service = service;
     }
 
@@ -74,6 +74,6 @@ public class MatriculaController {
     public ResponseEntity<MatriculaEntity> atualizar(@PathVariable Long id, @RequestBody MatriculaEntity matricula) {
         log.info("PUT Matriculas -> atualizar");
         log.info("200 OK");
-        return ResponseEntity.status(HttpStatus.OK).body(service.atualizar(id, matricula));
+        return ResponseEntity.status(HttpStatus.OK).body(service.atualizar(matricula, id));
     }
 }

@@ -2,7 +2,7 @@ package com.senai.projetonotas.controller;
 
 
 import com.senai.projetonotas.entity.DisciplinaEntity;
-import com.senai.projetonotas.service.DisciplinaService;
+import com.senai.projetonotas.facade.DisciplinaFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +16,16 @@ import java.util.List;
 @RequestMapping("/disciplinas")
 public class DisciplinaController {
 
-    private final DisciplinaService disciplinaService;
+    private final DisciplinaFacade facade;
 
-    public DisciplinaController(DisciplinaService disciplinaService) {
-        this.disciplinaService = disciplinaService;
+    public DisciplinaController(DisciplinaFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
     public ResponseEntity<List<DisciplinaEntity>> listarTodos(){
         log.info("GET Disciplinas -> listarTodos");
-        List<DisciplinaEntity> disciplinas = disciplinaService.listarTodos();
+        List<DisciplinaEntity> disciplinas = facade.listarTodos();
         log.info("200 OK");
         return new ResponseEntity<>(disciplinas, HttpStatus.OK);
     }
@@ -33,7 +33,7 @@ public class DisciplinaController {
     @GetMapping("/{id}")
     public ResponseEntity<DisciplinaEntity> listarPorId(@PathVariable Long id){
         log.info("GET Disciplinas -> listarPorId");
-        DisciplinaEntity disciplina = disciplinaService.listarPorId(id);
+        DisciplinaEntity disciplina = facade.listarPorId(id);
         log.info("200 OK");
         return new ResponseEntity<>(disciplina, HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class DisciplinaController {
     @PostMapping
     public ResponseEntity<DisciplinaEntity> salvar(@RequestBody DisciplinaEntity disciplina){
         log.info("POST Disciplina -> salvar");
-        DisciplinaEntity disciplinaSalva = disciplinaService.salvar(disciplina);
+        DisciplinaEntity disciplinaSalva = facade.salvar(disciplina);
         log.info("201 CREATED");
         return new ResponseEntity<>(disciplinaSalva, HttpStatus.CREATED);
     }
@@ -49,14 +49,14 @@ public class DisciplinaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerPorId(@PathVariable Long id){
         log.info("DELETE Disciplina -> removerPorId");
-        disciplinaService.removerPorId(id);
+        facade.removerPorId(id);
         log.info("204 NO_CONTENT");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody DisciplinaEntity disciplina){
         log.info("PUT Professor -> atualizar");
-        disciplinaService.atualizar(disciplina, id);
+        facade.atualizar(disciplina, id);
         log.info("200 OK");
         return new ResponseEntity<>(HttpStatus.OK);
     }

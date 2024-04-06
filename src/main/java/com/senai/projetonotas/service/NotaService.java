@@ -37,28 +37,8 @@ public class NotaService {
     }
 
 
-    public NotaEntity salvar(NotaEntity nota) {
-        log.info("salvando nota da matricula com id {}", nota.getMatricula().getId());
-
-        nota.setId(null);
-        nota.setMatricula(service.buscarMatriculaPorId(nota.getMatricula().getId()));
-        nota.setProfessor(nota.getMatricula().getDisciplina().getProfessor());
-        return repository.save(nota);
-    }
-
     public void removerPorId(Long id) {
         log.info("removendo nota do aluno com o id {}", id);
         repository.deleteById(id);
-    }
-
-    public NotaEntity atualizar(Long id, NotaEntity nota) {
-        log.info("atualizando nota da matricula com o id {}", nota.getMatricula().getId());
-
-        NotaEntity entity = buscarNotaPorId(id);
-        entity.setMatricula(service.buscarMatriculaPorId(nota.getMatricula().getId()));
-        entity.setProfessor(entity.getMatricula().getDisciplina().getProfessor());
-        entity.setNota(nota.getNota());
-        entity.setCoeficiente(nota.getCoeficiente());
-        return repository.save(entity);
     }
 }

@@ -2,6 +2,7 @@ package com.senai.projetonotas.controller;
 
 import com.senai.projetonotas.entity.MatriculaEntity;
 import com.senai.projetonotas.entity.NotaEntity;
+import com.senai.projetonotas.facade.NotaFacade;
 import com.senai.projetonotas.service.NotaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,16 +16,16 @@ import java.util.List;
 @RequestMapping("/notas")
 public class NotaController {
 
-    private final NotaService service;
+    private final NotaFacade facade;
 
-    public NotaController(NotaService service) {
-        this.service = service;
+    public NotaController(NotaFacade facade) {
+        this.facade = facade;
     }
 
     @GetMapping
     public ResponseEntity<List<NotaEntity>> listarTodos() {
         log.info("GET Notas -> listarTodos");
-        List<NotaEntity> notas = service.listarTodos();
+        List<NotaEntity> notas = facade.listarTodos();
         log.info("200 OK");
         return new ResponseEntity<>(notas, HttpStatus.OK);
     }
@@ -32,7 +33,7 @@ public class NotaController {
     @GetMapping("/{id}")
     public ResponseEntity<NotaEntity> listarPorId(@PathVariable Long id) {
         log.info("GET Notas -> listarPorId");
-        NotaEntity nota = service.listarPorId(id);
+        NotaEntity nota = facade.listarPorId(id);
         log.info("200 OK");
         return new ResponseEntity<>(nota, HttpStatus.OK);
     }
@@ -40,7 +41,7 @@ public class NotaController {
     @PostMapping
     public ResponseEntity<NotaEntity> salvar(@RequestBody NotaEntity nota) {
         log.info("POST Notas -> salvar");
-        NotaEntity notaSalva = service.salvar(nota);
+        NotaEntity notaSalva = facade.salvar(nota);
         log.info("201 CREATED");
         return new ResponseEntity<>(notaSalva, HttpStatus.CREATED);
     }
@@ -48,7 +49,7 @@ public class NotaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerPorId(@PathVariable Long id) {
         log.info("DELETE Notas -> removerPorId");
-        service.removerPorId(id);
+        facade.removerPorId(id);
         log.info("204 NO_CONTENT");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -57,6 +58,6 @@ public class NotaController {
     public ResponseEntity<NotaEntity> atualizar(@PathVariable Long id, @RequestBody NotaEntity nota) {
         log.info("PUT Notas -> atualizar");
         log.info("200 OK");
-        return ResponseEntity.status(HttpStatus.OK).body(service.atualizar(id, nota));
+        return ResponseEntity.status(HttpStatus.OK).body(facade.atualizar(nota, id));
     }
 }
