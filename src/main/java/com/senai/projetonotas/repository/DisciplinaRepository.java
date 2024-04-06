@@ -1,6 +1,7 @@
 package com.senai.projetonotas.repository;
 
 import com.senai.projetonotas.entity.DisciplinaEntity;
+import com.senai.projetonotas.entity.ProfessorEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,8 +12,9 @@ public interface DisciplinaRepository extends JpaRepository<DisciplinaEntity, Lo
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Disciplina SET nome = :nome, WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE Disciplina SET nome = :nome, professor_id = :professor WHERE id = :id", nativeQuery = true)
     int update(@Param("id") Long id,
-               @Param("nome") String nome
-    );
+               @Param("nome") String nome,
+               @Param("professor")Long professor
+               );
 }

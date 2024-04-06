@@ -12,8 +12,12 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class AlunoService {
-    @Autowired
-    AlunoRepository repository;
+
+    private final AlunoRepository repository;
+
+    public AlunoService(AlunoRepository repository) {
+        this.repository = repository;
+    }
 
     public List<AlunoEntity> listarTodos(){
         log.info("todos os alunos listados");
@@ -28,6 +32,7 @@ public class AlunoService {
 
     public AlunoEntity salvar(AlunoEntity aluno) {
         log.info("salvando aluno com o nome {}", aluno.getNome());
+        aluno.setId(null);
         return repository.save(aluno);
     }
     public void removerPorId(Long id) {

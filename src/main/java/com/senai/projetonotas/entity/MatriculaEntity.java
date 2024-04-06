@@ -2,6 +2,7 @@ package com.senai.projetonotas.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,9 +24,12 @@ public class MatriculaEntity {
     @JoinColumn(name = "disciplina_id", nullable = false)
     private DisciplinaEntity disciplina;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime dataMatricula;
+    @ColumnDefault(value = "CURRENT_TIMESTAMP")
+    @Column( columnDefinition = "TIMESTAMP")
+    private LocalDateTime dataMatricula = LocalDateTime.now();
 
-    @Column(nullable = false, columnDefinition = "NUMERIC(5,2) DEFAULT '0.00'")
-    private BigDecimal mediaFinal;
+
+    @ColumnDefault(value = "0.00")
+    @Column( columnDefinition = "NUMERIC(5,2)")
+    private BigDecimal mediaFinal = BigDecimal.valueOf(0.00);
 }

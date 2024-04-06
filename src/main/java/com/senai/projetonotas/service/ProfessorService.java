@@ -13,9 +13,11 @@ import java.util.List;
 @Service
 public class ProfessorService {
 
-    @Autowired
-    ProfessorRepository professorRepository;
+    private final ProfessorRepository professorRepository;
 
+    public ProfessorService(ProfessorRepository professorRepository) {
+        this.professorRepository = professorRepository;
+    }
 
     public List<ProfessorEntity> listarTodos(){
         log.info("todos os professores listados");
@@ -30,6 +32,7 @@ public class ProfessorService {
 
     public ProfessorEntity salvar(ProfessorEntity professor) {
         log.info("salvando professor com o nome {}", professor.getNome());
+        professor.setId(null);
         return professorRepository.save(professor);
     }
     public void removerPorId(Long id) {
@@ -37,8 +40,8 @@ public class ProfessorService {
         professorRepository.deleteById(id);
     }
 
-    public int atualizar(ProfessorEntity professor){
+    public int atualizar(ProfessorEntity professor, Long id){
         log.info("atualizando professor com o id {}", professor.getId());
-        return professorRepository.update(professor.getId(), professor.getNome());
+        return professorRepository.update(id, professor.getNome());
     }
 }
