@@ -2,6 +2,7 @@ package com.senai.projetonotas.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 
@@ -22,10 +23,12 @@ public class NotaEntity {
     @JoinColumn(name = "professor_id", nullable = false)
     private ProfessorEntity professor;
 
-    @Column(nullable = false, columnDefinition = "NUMERIC(5,2) DEFAULT '0.00'")
+    @ColumnDefault(value = "0.00")
+    @Column(nullable = false, columnDefinition = "NUMERIC(5,2)")
     private BigDecimal nota;
 
-    @Column(nullable = false, columnDefinition = "NUMERIC(19,6) DEFAULT '0.00'")
+    @ColumnDefault(value = "0.000000")
+    @Column(nullable = false, columnDefinition = "NUMERIC(19,6)")
     private BigDecimal coeficiente;
 
 }
