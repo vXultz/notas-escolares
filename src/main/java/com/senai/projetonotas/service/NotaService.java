@@ -2,6 +2,7 @@ package com.senai.projetonotas.service;
 
 import com.senai.projetonotas.entity.MatriculaEntity;
 import com.senai.projetonotas.entity.NotaEntity;
+import com.senai.projetonotas.exception.error.NotFoundException;
 import com.senai.projetonotas.repository.NotaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,9 +35,16 @@ public class NotaService {
     }
 
     public NotaEntity buscarNotaPorId(Long id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Nenhuma nota com o ID informado encontrada"));
     }
 
+    public List<NotaEntity> buscarNotaPorMatriculaId(Long id) {
+        List<NotaEntity> notas = repository.findByMatriculaId(id);
+        if (notas.isEmpty()) {
+            throw new NotFoundException("Nenhuma nota com este ID de matricula encontrada");
+        }
+        return notas;
+    }
 
     public BigDecimal calcularNota(BigDecimal coeficiente, BigDecimal nota) {
         return nota.multiply(coeficiente);

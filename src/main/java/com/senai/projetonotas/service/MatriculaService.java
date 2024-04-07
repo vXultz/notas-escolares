@@ -31,7 +31,7 @@ public class MatriculaService {
     }
 
     public MatriculaEntity buscarMatriculaPorId(Long id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Nenhuma matricula com o ID informado encontrada"));
     }
 
     public List<MatriculaEntity> buscarMatriculaPorAlunoId(Long id) {
@@ -57,10 +57,9 @@ public class MatriculaService {
     }
 
 
-
     public MatriculaEntity atualizar(Long id, MatriculaEntity matricula) {
-        log.info("atualizando matricula do aluno com o id {}", matricula.getAluno().getId());
         MatriculaEntity entity = buscarMatriculaPorId(id);
+        log.info("atualizando matricula do aluno com o id {}", matricula.getAluno().getId());
         entity.setAluno(matricula.getAluno());
         entity.setDisciplina(matricula.getDisciplina());
         entity.setMediaFinal(matricula.getMediaFinal());

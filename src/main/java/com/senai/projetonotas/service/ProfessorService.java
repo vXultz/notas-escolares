@@ -19,15 +19,14 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    public List<ProfessorEntity> listarTodos(){
+    public List<ProfessorEntity> listarTodos() {
         log.info("todos os professores listados");
         return professorRepository.findAll();
     }
 
-    public ProfessorEntity listarPorId(Long id){
+    public ProfessorEntity listarPorId(Long id) {
         log.info("professor com id {} buscado", id);
         return professorRepository.findById(id).orElseThrow();
-
     }
 
     public ProfessorEntity salvar(ProfessorEntity professor) {
@@ -35,12 +34,13 @@ public class ProfessorService {
         professor.setId(null);
         return professorRepository.save(professor);
     }
+
     public void removerPorId(Long id) {
         log.info("removendo professor com o id {}", id);
         professorRepository.deleteById(id);
     }
 
-    public int atualizar(ProfessorEntity professor, Long id){
+    public int atualizar(ProfessorEntity professor, Long id) {
         log.info("atualizando professor com o id {}", professor.getId());
         return professorRepository.update(id, professor.getNome());
     }

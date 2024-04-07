@@ -20,15 +20,14 @@ public class DisciplinaService {
         this.disciplinaRepository = disciplinaRepository;
     }
 
-    public List<DisciplinaEntity> listarTodos(){
+    public List<DisciplinaEntity> listarTodos() {
         log.info("todas as Disciplinas listadas");
         return disciplinaRepository.findAll();
     }
 
-    public DisciplinaEntity listarPorId(Long id){
+    public DisciplinaEntity listarPorId(Long id) {
         log.info("disciplina com id {} buscado", id);
         return disciplinaRepository.findById(id).orElseThrow();
-
     }
 
     public DisciplinaEntity salvar(DisciplinaEntity disciplina) {
@@ -36,12 +35,13 @@ public class DisciplinaService {
         disciplina.setId(null);
         return disciplinaRepository.save(disciplina);
     }
+
     public void removerPorId(Long id) {
         log.info("removendo disciplina com o id {}", id);
         disciplinaRepository.deleteById(id);
     }
 
-    public int atualizar(DisciplinaEntity disciplina, Long id){
+    public int atualizar(DisciplinaEntity disciplina, Long id) {
         log.info("atualizando disciplina com o id {}", disciplina.getId());
         return disciplinaRepository.update(id, disciplina.getNome(), disciplina.getProfessor().getId());
     }

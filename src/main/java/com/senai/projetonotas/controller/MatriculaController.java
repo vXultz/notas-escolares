@@ -1,9 +1,9 @@
 package com.senai.projetonotas.controller;
 
+import com.senai.projetonotas.dto.response.MediaGeralDto;
 import com.senai.projetonotas.entity.MatriculaEntity;
 import com.senai.projetonotas.facade.MatriculaFacade;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +15,17 @@ import java.util.List;
 @RequestMapping("/matriculas")
 public class MatriculaController {
 
-    private final MatriculaFacade service;
+    private final MatriculaFacade facade;
 
-    public MatriculaController(MatriculaFacade service) {
-        this.service = service;
+    public MatriculaController(MatriculaFacade facade) {
+        this.facade = facade;
     }
 
 
     @GetMapping
     public ResponseEntity<List<MatriculaEntity>> listarTodos() {
         log.info("GET Matriculas -> listarTodos");
-        List<MatriculaEntity> matriculas = service.listarTodos();
+        List<MatriculaEntity> matriculas = facade.listarTodos();
         log.info("200 OK");
         return new ResponseEntity<>(matriculas, HttpStatus.OK);
     }
@@ -33,7 +33,7 @@ public class MatriculaController {
     @GetMapping("/{id}")
     public ResponseEntity<MatriculaEntity> listarPorId(@PathVariable Long id) {
         log.info("GET Matriculas -> listarPorId");
-        MatriculaEntity matricula = service.listarPorId(id);
+        MatriculaEntity matricula = facade.listarPorId(id);
         log.info("200 OK");
         return new ResponseEntity<>(matricula, HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class MatriculaController {
     @GetMapping("aluno-id/{id}")
     public ResponseEntity<List<MatriculaEntity>> getAlunoId(@PathVariable Long id) {
         log.info("GET Matriculas/aluno-id -> buscarMatriculaPorAlunoId");
-        List<MatriculaEntity> matriculas = service.buscarMatriculaPorAlunoId(id);
+        List<MatriculaEntity> matriculas = facade.buscarMatriculaPorAlunoId(id);
         log.info("200 OK");
         return ResponseEntity.status(HttpStatus.OK).body(matriculas);
     }
@@ -49,15 +49,23 @@ public class MatriculaController {
     @GetMapping("disciplina-id/{id}")
     public ResponseEntity<List<MatriculaEntity>> getDisciplinaId(@PathVariable Long id) {
         log.info("GET Matriculas/disciplina-id -> buscarMatriculaPorDisciplinaId");
-        List<MatriculaEntity> matriculas = service.buscarMatriculaPorDisciplinaId(id);
+        List<MatriculaEntity> matriculas = facade.buscarMatriculaPorDisciplinaId(id);
         log.info("200 OK");
         return ResponseEntity.status(HttpStatus.OK).body(matriculas);
+    }
+
+    @GetMapping("media-geral/{id}")
+    public ResponseEntity<MediaGeralDto> mediaGeral(@PathVariable Long id) {
+        log.info("GET Matriculas/media-geral -> mediaGeral");
+        MediaGeralDto mediaGeral = facade.buscarMediaGeral(id);
+        log.info("200 OK");
+        return ResponseEntity.status(HttpStatus.OK).body(mediaGeral);
     }
 
     @PostMapping
     public ResponseEntity<MatriculaEntity> salvar(@RequestBody MatriculaEntity matricula) {
         log.info("POST Matriculas -> salvar");
-        MatriculaEntity matriculaSalva = service.salvar(matricula);
+        MatriculaEntity matriculaSalva = facade.salvar(matricula);
         log.info("201 CREATED");
         return new ResponseEntity<>(matriculaSalva, HttpStatus.CREATED);
     }
@@ -65,7 +73,7 @@ public class MatriculaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerPorId(@PathVariable Long id) {
         log.info("DELETE Matriculas -> removerPorId");
-        service.removerPorId(id);
+        facade.removerPorId(id);
         log.info("204 NO_CONTENT");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -74,6 +82,6 @@ public class MatriculaController {
     public ResponseEntity<MatriculaEntity> atualizar(@PathVariable Long id, @RequestBody MatriculaEntity matricula) {
         log.info("PUT Matriculas -> atualizar");
         log.info("200 OK");
-        return ResponseEntity.status(HttpStatus.OK).body(service.atualizar(matricula, id));
+        return ResponseEntity.status(HttpStatus.OK).body(facade.atualizar(matricula, id));
     }
 }
