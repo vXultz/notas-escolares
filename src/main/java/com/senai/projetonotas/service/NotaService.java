@@ -6,6 +6,7 @@ import com.senai.projetonotas.repository.NotaRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -37,8 +38,7 @@ public class NotaService {
     }
 
 
-    public void removerPorId(Long id) {
-        log.info("removendo nota do aluno com o id {}", id);
-        repository.deleteById(id);
+    public BigDecimal calcularNota(BigDecimal coeficiente, BigDecimal nota) {
+        return nota.multiply(coeficiente);
     }
 }

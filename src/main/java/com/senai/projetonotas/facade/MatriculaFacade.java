@@ -50,7 +50,7 @@ public class MatriculaFacade {
     }
 
     public MatriculaEntity atualizar(MatriculaEntity matricula, Long id){
-        return atualizar(matricula,id);
+        return service.atualizar(id, matricula);
     }
 
     public List<MatriculaEntity> buscarMatriculaPorAlunoId(Long id) {
