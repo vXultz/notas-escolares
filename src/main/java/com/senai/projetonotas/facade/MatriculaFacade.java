@@ -1,15 +1,19 @@
 package com.senai.projetonotas.facade;
 
+import com.senai.projetonotas.dto.response.MediaGeralDto;
 import com.senai.projetonotas.entity.MatriculaEntity;
 import com.senai.projetonotas.entity.NotaEntity;
 import com.senai.projetonotas.repository.MatriculaRepository;
 import com.senai.projetonotas.service.MatriculaService;
 import com.senai.projetonotas.service.NotaService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Service
 public class MatriculaFacade {
     
@@ -38,12 +42,13 @@ public class MatriculaFacade {
     }
 
     public void removerPorId(Long id) {
+        log.info("removendo matricula com id {}", id);
         MatriculaEntity matricula = service.listarPorId(id);
         List<NotaEntity> listaNotas = notaService.listarTodos();
 
         for (NotaEntity nota : listaNotas){
             if (Objects.equals(nota.getMatricula(), matricula)){
-                throw new RuntimeException("Não é possivel deletar uma Matricula com nota vinculada");
+                throw new RuntimeException("Não é possível deletar uma Matricula com nota vinculada");
             }
         }
         repository.deleteById(id);
@@ -59,5 +64,18 @@ public class MatriculaFacade {
 
     public List<MatriculaEntity> buscarMatriculaPorDisciplinaId(Long id) {
         return service.buscarMatriculaPorDisciplinaId(id);
+    }
+
+    public MediaGeralDto buscarMediaGeral(Long id) {
+        log.info("buscando média geral de aluno com id {}", id);
+        List<MatriculaEntity> listaMatriculas = repository.findByAlunoId(id);
+
+        BigDecimal mediaGeral = new BigDecimal("0");
+
+        for (MatriculaEntity listaMatricula : listaMatriculas) {
+            mediaGeral = mediaGeral.add(listaMatricula.getMediaFinal());
+        }
+
+        return new MediaGeralDto(mediaGeral);
     }
 }
