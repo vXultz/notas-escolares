@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
 
@@ -76,6 +77,11 @@ public class MatriculaFacade {
             mediaGeral = mediaGeral.add(listaMatricula.getMediaFinal());
         }
 
-        return new MediaGeralDto(mediaGeral);
+        if (!listaMatriculas.isEmpty()) {
+            BigDecimal mediaFinal = mediaGeral.divide(BigDecimal.valueOf(listaMatriculas.size()), 2, RoundingMode.HALF_UP);
+            return new MediaGeralDto(mediaFinal);
+        } else {
+            return new MediaGeralDto(BigDecimal.ZERO); // Retorna zero se a lista estiver vazia
+        }
     }
 }

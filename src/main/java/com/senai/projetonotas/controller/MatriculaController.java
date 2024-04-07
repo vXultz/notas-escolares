@@ -54,7 +54,7 @@ public class MatriculaController {
         return ResponseEntity.status(HttpStatus.OK).body(matriculas);
     }
 
-    @GetMapping("media-geral")
+    @GetMapping("media-geral/{id}")
     public ResponseEntity<MediaGeralDto> mediaGeral(@PathVariable Long id) {
         log.info("GET Matriculas/media-geral -> mediaGeral");
         MediaGeralDto mediaGeral = facade.buscarMediaGeral(id);

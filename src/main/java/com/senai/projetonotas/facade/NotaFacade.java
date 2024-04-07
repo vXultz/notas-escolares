@@ -93,4 +93,8 @@ public class NotaFacade {
 
         return repository.save(entity);
     }
+
+    public List<NotaEntity> buscarNotaPorMatriculaId(Long id) {
+        return service.buscarNotaPorMatriculaId(id);
+    }
 }

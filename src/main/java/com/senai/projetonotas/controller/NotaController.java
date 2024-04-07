@@ -38,6 +38,14 @@ public class NotaController {
         return new ResponseEntity<>(nota, HttpStatus.OK);
     }
 
+    @GetMapping("matricula-id/{id}")
+    public ResponseEntity<List<NotaEntity>> getMatriculaId(@PathVariable Long id) {
+        log.info("GET Notas/matricula-id -> buscarNotaPorMatriculaId");
+        List<NotaEntity> notas = facade.buscarNotaPorMatriculaId(id);
+        log.info("200 OK");
+        return ResponseEntity.status(HttpStatus.OK).body(notas);
+    }
+
     @PostMapping
     public ResponseEntity<NotaEntity> salvar(@RequestBody NotaEntity nota) {
         log.info("POST Notas -> salvar");
