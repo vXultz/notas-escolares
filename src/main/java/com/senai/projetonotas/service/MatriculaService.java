@@ -63,6 +63,7 @@ public class MatriculaService {
         MatriculaEntity entity = buscarMatriculaPorId(id);
         entity.setAluno(matricula.getAluno());
         entity.setDisciplina(matricula.getDisciplina());
+        entity.setMediaFinal(matricula.getMediaFinal());
         return repository.save(entity);
     }
 }

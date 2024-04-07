@@ -46,6 +46,7 @@ public class NotaFacade {
         matricula.setMediaFinal(matricula.getMediaFinal().subtract(notaMediaFinal));
 
         repository.delete(nota);
+        matriculaService.atualizar(matricula.getId(), matricula);
     }
 
 
@@ -60,7 +61,7 @@ public class NotaFacade {
 
         matricula.setMediaFinal(notaMediaFinal.add(matricula.getMediaFinal()));
 
-        matriculaService.salvar(matricula);
+        matriculaService.atualizar(matricula.getId(), matricula);
 
         //salva nova nota
         nota.setMatricula(matricula);
@@ -81,7 +82,7 @@ public class NotaFacade {
 
         matricula.setMediaFinal(matricula.getMediaFinal().add(notaAtualizada.subtract(notaAntiga)));
 
-        matriculaService.salvar(matricula);
+        matriculaService.atualizar(matricula.getId(), matricula);
 
         //atualiza nota
         entity.setMatricula(matricula);
