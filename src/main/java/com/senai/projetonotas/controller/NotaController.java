@@ -58,6 +58,6 @@ public class NotaController {
     public ResponseEntity<NotaEntity> atualizar(@PathVariable Long id, @RequestBody NotaEntity nota) {
         log.info("PUT Notas -> atualizar");
         log.info("200 OK");
-        return ResponseEntity.status(HttpStatus.OK).body(facade.atualizar(nota, id));
+        return ResponseEntity.status(HttpStatus.OK).body(facade.atualizar(id, nota));
     }
 }
